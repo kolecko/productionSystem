@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.col {
+  flex-grow: 1;
+  box-sizing: border-box;
+  width: 320px;
+  padding: 1rem;
+}
+
+.padding {
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+.col .full-width {
+  width: 100%;
+}
+
+.y-spacing {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+
+
+.button-selection-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-items: flex-start;
+}
+
+.button-selection-wrapper button {
+  flex-grow: 1;
+  margin: .2rem;
+}
+
+p {
+  margin: .1rem;
+}

@@ -1,0 +1,122 @@
+<div class="container">
+  <h1 class="mat-display-2" style="margin: 1rem">Dopredný produkčný systém</h1>
+</div>
+<div class="container">
+  <div class="col" style="flex-grow: 2">
+    <div class="mat-elevation-z1 padding">
+      <div class="mat-h3">Pridať fakt</div>
+      <mat-form-field class="full-width">
+        <input matInput type="text" placeholder="Fakt" [(ngModel)]="factInput">
+        <mat-hint>Fakt v tvare napr.: Ivan je otec</mat-hint>
+        <button mat-mini-fab color="primary" (click)="addFact()" style="position: absolute; right: 0">
+          <mat-icon>check</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <div class="mat-elevation-z1 padding y-spacing">
+      <h3 class="mat-h3">Pridať pravidlo</h3>
+      <mat-form-field class="full-width">
+        <input matInput type="text" placeholder="NÁZOV" [(ngModel)]="ruleNameInput">
+        <mat-hint>Názov pravidla napr.: pravidlo</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="full-width y-spacing">
+        <input matInput type="text" placeholder="AK" [(ngModel)]="ruleConditionInput">
+        <mat-hint>
+          Podmienka pravidla napr.: $x je $y<br>
+          Konjukcia podmienok: podmienka1 ^ podmienka2
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="full-width y-spacing" style="margin: 0 0 2rem 0">
+        <input matInput type="text" placeholder="POTOM" [(ngModel)]="ruleActionInput">
+        <mat-hint>
+          Akcia pravidla napr.: pridaj $x genericke $y<br>
+          Konjukcia akcí: akcia1 & akcia2
+          Akcie: pridat, vymazat, vypisat
+        </mat-hint>
+        <button mat-mini-fab color="primary" (click)="addRule()" style="position: absolute; right: 0">
+          <mat-icon>check</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <div class="mat-elevation-z1 padding y-spacing">
+      <h3 class="mat-h3">Načítať vzťahy</h3>
+      <div class="button-selection-wrapper">
+        <button mat-raised-button color="accent" (click)="loadSetFamilyRelations()">
+          Rodinné vzťahy
+          <mat-icon>group</mat-icon>
+        </button>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <h3 class="mat-h3">Vykonať operácie</h3>
+      <div class="button-selection-wrapper">
+        <button mat-raised-button color="primary" (click)="step()">
+          Krok
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+        <button mat-raised-button color="primary" (click)="interfere()">
+          Do konca
+          <mat-icon>skip_next</mat-icon>
+        </button>
+        <button mat-raised-button color="primary" (click)="clear()">
+          Vyčistiť
+          <mat-icon>clear_all</mat-icon>
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+      <p class="mat-caption">
+        "Pomocný výstup" sa nachádza v konzole.
+      </p>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="mat-elevation-z1 padding">
+      <h2 class="mat-h2">Fakty</h2>
+      <mat-list>
+        <mat-list-item *ngFor="let fact of productionSystem.facts; let i = index">
+          {{fact.fullText}}
+          <button mat-icon-button color="warn" (click)="dropFact(i)" style="position: absolute; right: 0">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="mat-elevation-z1 padding">
+      <h2 class="mat-h2">Pravidlá</h2>
+      <mat-accordion class="y-spacing">
+        <mat-expansion-panel *ngFor="let rule of productionSystem.rules; let i = index" style="height: 100%">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span class="mat-body-strong">{{rule.name}}</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <span class="mat-body-1">AK:</span>&nbsp;<span class="mat-body-2">{{rule.conditionFullText}}</span><br>
+          <span class="mat-body-1">POTOM:</span>&nbsp;<span class="mat-body-2">{{rule.actionFullText}}</span><br>
+          <button mat-raised-button color="warn" (click)="dropRule(i)" style="position: relative; right: 0" class="y-spacing">
+            Vymazať <mat-icon>close</mat-icon>
+          </button>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="mat-elevation-z1 padding">
+      <h2 class="mat-h2">Správy</h2>
+      <mat-list>
+        <mat-list-item *ngFor="let message of productionSystem.messages; let i = index">
+          {{message}}
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</div>

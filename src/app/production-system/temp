@@ -1,0 +1,25 @@
+{
+name: 'Otec',
+condition: '$X je rodic $Y ^ muz $X',
+action: 'pridat $X je otec $'
+}, {
+name: 'Matka',
+condition: '$X je rodic $Y ^ zena $X',
+action: 'pridat $X je matka $'
+}, {
+name: 'Surodenci',
+condition: '$X je rodic $Y ^ $X je rodic $Z ^ <> $Y $Z',
+action: 'pridat $Y a $Z su surodenc'
+}, {
+name: 'Brat',
+condition: '$Y a $Z su surodenci  ^ muz $Y',
+action: 'pridat $Y je brat $'
+}, {
+name: 'Stryko',
+condition: '$Y je brat $Z ^ $Z je rodic $X',
+action: 'pridat $Y je stryko $X && vypisat $X ma stryk'
+}, {
+name: 'Test mazania',
+condition: '$Y je stryko $X ^ zena $X',
+action: 'vymazat zena $'
+}
